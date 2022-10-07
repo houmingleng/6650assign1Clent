@@ -1,22 +1,31 @@
 package module;
 
+import io.swagger.client.model.LiftRide;
+
 public class ReqObject {
     private int skierID;
     private int resortID;
-
-
-
+    LiftRide curLiftRide;
     private int liftID;
     private String dayID;
     private String seasonID;
     private int time;
-    public ReqObject(int skierID, int resortID, int liftID, String dayID, String seasonID, int time) {
+    public ReqObject(int skierID, int resortID, int liftID, String dayID, String seasonID, int time,LiftRide curLiftRide) {
         this.skierID = skierID;
         this.resortID = resortID;
         this.liftID = liftID;
         this.dayID = dayID;
         this.seasonID = seasonID;
         this.time = time;
+        this.curLiftRide = curLiftRide;
+    }
+
+    public LiftRide getCurLiftRide() {
+        return curLiftRide;
+    }
+
+    public void setCurLiftRide(LiftRide curLiftRide) {
+        this.curLiftRide = curLiftRide;
     }
 
     public int getSkierID() {

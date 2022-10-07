@@ -1,6 +1,10 @@
 package part1;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,6 +24,7 @@ public class ThreadClient {
         System.out.println("*********************************************************");
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger failure = new AtomicInteger(0);
+        AtomicInteger finished = new AtomicInteger(0);
         IPAddress = "35.90.188.162:8080/upiServlet_war/";
         numThreads = 32;
         numLifts = 40;
@@ -30,22 +35,47 @@ public class ThreadClient {
         int numReq1 =  1000,
                 begin = 1,
                 finial = 360,
-                endLatch = 1,
+                //endLatch = 1,
                 totalReq = 200000;
-        CountDownLatch latch = new CountDownLatch(endLatch);
-        CountDownLatch totalLatch = new CountDownLatch(endLatch);
-        ThreadPoolExecutor es = new ThreadPoolExecutor(numThreads,2*numThreads,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        MiddleWare middleWare = new MiddleWare(totalReq,IPAddress, resortID, dayID, seasonID,
-                numSkiers, begin, finial, numLifts, success, failure,es);
-        middleWare.beginPhase();
-        while(es.getPoolSize()!=0);
 
+        // phase1
+        ThreadPoolExecutor es = new ThreadPoolExecutor(32,32,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es2 = new ThreadPoolExecutor(1,1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es3 = new ThreadPoolExecutor(32,32,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es4 = new ThreadPoolExecutor(84,(totalReq-32000)/numReq1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+//        MiddleWare middleWare = new MiddleWare(totalReq,IPAddress, resortID, dayID, seasonID,
+//                numSkiers, begin, finial, numLifts, success, failure,es);
+        CountDownLatch latch = new CountDownLatch(32);
+        AtomicInteger successproduce = new AtomicInteger(0);
+
+        int producernumber = 1;
+        int comsumernumber = 32;
+       ThreadPoll threadPoll = new ThreadPoll(32*1000,IPAddress,resortID,
+                dayID,seasonID,numSkiers,begin, finial,numLifts, success,failure,es,es2,finished,latch,producernumber,comsumernumber,successproduce);
+        threadPoll.beginPhase();
+        //latch.await();
+        while(success.get()+failure.get() < 32*1000);
         long end = System.currentTimeMillis();
+        long currs = (end-start)/1000;
+        System.out.println("************phase1 take : "+(end-start)/1000 +" S"+"**************************************");
+        System.out.println("*********************************************************");
+        latch = new CountDownLatch(totalReq/1000 - 32);
+         producernumber = 42;
+         comsumernumber = (totalReq-1000*32)/1000;
+        ThreadPoll threadPoll2 = new ThreadPoll(totalReq ,IPAddress,resortID,
+                dayID,seasonID,numSkiers,begin, finial,numLifts, success,failure,es3,es4,finished,latch,producernumber,comsumernumber,successproduce);
+        threadPoll2.beginPhase();
+
+        while(success.get()+failure.get()<totalReq);
+
+       end = System.currentTimeMillis();
         long wallTime = end - start;
+        System.out.println("************phase2 take : "+((end-start)/1000-currs) +" S"+"**************************************");
+        System.out.println("*********************************************************");
+
         System.out.println("*********************************************************");
         System.out.println("End......");
         System.out.println("*********************************************************");
-        System.out.println("Target server IP is: " + IPAddress);
         System.out.println("*********************************************************");
         System.out.println("Number of successful requests :" + success.get());
         System.out.println("Number of failed requests :" + failure.get());
