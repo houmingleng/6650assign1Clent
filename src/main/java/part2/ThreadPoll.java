@@ -59,7 +59,7 @@ public class ThreadPoll {
     }
     public  void beginPhase() throws InterruptedException{
 
-        this.queue = new LinkedBlockingQueue(100);
+        this.queue = new LinkedBlockingQueue(2000);
         for (int i = 0; i < producernumber; i++) {
             Producer producer = new Producer(totalReq,IPAddress,resortID,dayID,seasonID,1,numSkier, startTime,endTime, numLifts, successCallCount,queue ,1000, successproduce );
             es2.execute(producer);
