@@ -25,7 +25,8 @@ public class ThreadClient {
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger failure = new AtomicInteger(0);
         AtomicInteger finished = new AtomicInteger(0);
-        IPAddress = "35.90.188.162:8080/upiServlet_war/";
+        IPAddress = "34.215.195.155:8080/upiServlet_war/";
+       // IPAddress="http://localhost:8080/springServlet/";
         numThreads = 32;
         numLifts = 40;
         //numRuns = cmdParser.numRuns;
@@ -40,9 +41,9 @@ public class ThreadClient {
 
         // phase1
         ThreadPoolExecutor es = new ThreadPoolExecutor(32,32,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        ThreadPoolExecutor es2 = new ThreadPoolExecutor(1,1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        ThreadPoolExecutor es3 = new ThreadPoolExecutor(100,100,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        ThreadPoolExecutor es4 = new ThreadPoolExecutor(100,(totalReq-32000)/numReq1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es2 = new ThreadPoolExecutor(32,32,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es3 = new ThreadPoolExecutor(80,80,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es4 = new ThreadPoolExecutor(80,(totalReq-32000)/numReq1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
 //        MiddleWare middleWare = new MiddleWare(totalReq,IPAddress, resortID, dayID, seasonID,
 //                numSkiers, begin, finial, numLifts, success, failure,es);
         CountDownLatch latch = new CountDownLatch(32);

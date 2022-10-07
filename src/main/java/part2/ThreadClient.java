@@ -41,8 +41,8 @@ public class ThreadClient {
         // phase1
         ThreadPoolExecutor es = new ThreadPoolExecutor(32,32,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
         ThreadPoolExecutor es2 = new ThreadPoolExecutor(1,1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        ThreadPoolExecutor es3 = new ThreadPoolExecutor(100,100,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-        ThreadPoolExecutor es4 = new ThreadPoolExecutor(100,(totalReq-32000)/numReq1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es3 = new ThreadPoolExecutor(80,80,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
+        ThreadPoolExecutor es4 = new ThreadPoolExecutor(80,(totalReq-32000)/numReq1,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
 //        MiddleWare middleWare = new MiddleWare(totalReq,IPAddress, resortID, dayID, seasonID,
 //                numSkiers, begin, finial, numLifts, success, failure,es);
         CountDownLatch latch = new CountDownLatch(32);
