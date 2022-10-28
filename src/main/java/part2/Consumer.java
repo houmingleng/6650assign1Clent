@@ -41,7 +41,8 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
 
-      String url = "http://34.223.213.189:8080/upiServlet_war";
+      String url = "http://34.219.153.177:8080/cs6650assign2RabiitMQ_war/skiers/";
+      //  String url = "http://localhost:8080/s6650assign2RabiitMQ_war_exploded/skiers/";
        // String url = "http://localhost:8080/upiServlet_war_exploded/";
         //http://localhost:8080/upiServlet_war_exploded/
         SkiersApi api = new SkiersApi();

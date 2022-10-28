@@ -25,7 +25,8 @@ public class ThreadClient {
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger failure = new AtomicInteger(0);
         AtomicInteger finished = new AtomicInteger(0);
-        IPAddress = "35.90.188.162:8080/upiServlet_war/";
+        IPAddress = "http://34.219.153.177:8080/cs6650assign2RabiitMQ_war/skiers/";
+       // IPAddress= "http://localhost:8080/s6650assign2RabiitMQ_war_exploded/skiers/";
         numThreads = 32;
         numLifts = 40;
         //numRuns = cmdParser.numRuns;

@@ -8,7 +8,8 @@ public class ApiClientUseCaseTest {
 
         public static void main(String[] args) {
             ApiClient apiClient=new ApiClient();
-            apiClient.setBasePath("http://localhost:8080/untitled_war_exploded/");
+            //http://localhost:8080/upiServlet_war/skiers/sdcvsdv
+            apiClient.setBasePath("http://localhost:8080/cs6650assign2RabiitMQ_war_exploded/skiers/");
             SkiersApi skiersApi=new SkiersApi(apiClient);
             LiftRide liftRide=new LiftRide();
             liftRide.setLiftID(1);

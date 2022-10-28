@@ -25,8 +25,8 @@ public class ThreadClient {
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger failure = new AtomicInteger(0);
         AtomicInteger finished = new AtomicInteger(0);
-        IPAddress = "34.215.195.155:8080/upiServlet_war/";
-       // IPAddress="http://localhost:8080/springServlet/";
+        //IPAddress = "34.215.195.155:8080/upiServlet_war/";
+        IPAddress="http://localhost:8080/cs6650assign2RabiitMQ_war_exploded/skiers/";
         numThreads = 32;
         numLifts = 40;
         //numRuns = cmdParser.numRuns;

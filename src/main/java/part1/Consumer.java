@@ -41,8 +41,8 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
 
-      String url = "http://34.215.195.155:8080/upiServlet_war";
-       // String url = "http://localhost:8080/springServlet/";
+     // String url = "http://34.215.195.155:8080/upiServlet_war";
+        String url = "http://localhost:8080/cs6650assign2RabiitMQ_war_exploded/skiers/";
         //http://localhost:8080/upiServlet_war_exploded/
         SkiersApi api = new SkiersApi();
         api.getApiClient().setBasePath(url).setReadTimeout(100);
